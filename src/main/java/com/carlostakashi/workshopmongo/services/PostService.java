@@ -16,14 +16,17 @@ public class PostService {
     @Autowired
     private PostRepository repo;
 
-    public Post findById(String id){
+    public Post findById(String id) {
 
         Optional<Post> Post = repo.findById(id);
         if (Post.isEmpty()) {
             throw new ObjectNotFoundException("objeto nao encontrado");
         }
         return Post.get();
-        
+    }
+
+    public List<Post> findByTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
     }
 
 }
